@@ -43,7 +43,7 @@ yr_smpl(){
 	read p
 	echo  "What is the interest rate(%)?"
 	read i
-	yr=$(awk "BEGIN {($f*100/$p*$i)-(1/$i)}")
+	yr=$(awk "BEGIN {print ($f*100/$p*$i)-(1/$i)}")
 	echo "Number of Years: $yr"
 }
 
@@ -66,14 +66,20 @@ ft_amnt_cmpd(){
 	read ans
 
 	case $ans in
-		a) m=1;;
-		b) m=2;;
-		c) m=4;;
-		d) m=12;;
-	esac
+		a) m=1
+		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+        	echo "Future Amount: $ft_amnt";;
+		b) m=2
+		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+        	echo "Future Amount: $ft_amnt";;
+		c) m=4
+		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+        	echo "Future Amount: $ft_amnt";;
+		d) m=12
+		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+        	echo "Future Amount: $ft_amnt";;
 
-        ft_amnt=$(awk "BEGIN {print $p(1+($i/m*100))**($n*$m)}")
-        echo "Future Amount: $ft_amnt"
+	esac
 }
 
 
@@ -99,7 +105,7 @@ pr_amnt_cmpd(){
                 d) m=12;;
         esac
 
-        pr_amnt=$(awk "BEGIN {print $f(1+($i/m*100))**(-$n*$m)}")
+        pr_amnt=$(awk "BEGIN {print $f(1+($i/$m*100))**(-$n*$m)}")
         echo "Principal Amount: $pr_amnt"
 }
 

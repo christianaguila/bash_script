@@ -8,7 +8,7 @@ ft_amnt_smpl(){
 	read i
 	echo "How many years?"
 	read n
-	ft_amnt=$(awk "BEGIN {print $p(1+($i/100)*$n)}")
+	ft_amnt=$(awk "BEGIN {print $p*(1+($i/100)*$n)}")
 	echo "Future Amount: $ft_amnt"
 }
 
@@ -31,7 +31,7 @@ int_rt_smpl(){
 	read p
 	echo "How many years?"
 	read n
-	int_rt=$(awk "BEGIN {print (($f/$p*$n)-(1/$n))*100}")
+	int_rt=$(awk "BEGIN {print (($f/($p*$n))-(1/$n))*100}")
 	echo "Interest Rate: $int_rt%"
 }
 
@@ -43,7 +43,7 @@ yr_smpl(){
 	read p
 	echo  "What is the interest rate(%)?"
 	read i
-	yr=$(awk "BEGIN {print ($f*100/$p*$i)-(1/$i)}")
+	yr=$(awk "BEGIN {print (($f*100)/($p*$i))-(100/$i)}")
 	echo "Number of Years: $yr"
 }
 
@@ -67,16 +67,16 @@ ft_amnt_cmpd(){
 
 	case $ans in
 		a) m=1
-		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+		ft_amnt=$(awk "BEGIN {print $p*(1+($i/($m*100)))**($n*$m)}")
         	echo "Future Amount: $ft_amnt";;
 		b) m=2
-		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+		ft_amnt=$(awk "BEGIN {print $p*(1+($i/($m*100)))**($n*$m)}")
         	echo "Future Amount: $ft_amnt";;
 		c) m=4
-		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+		ft_amnt=$(awk "BEGIN {print $p*(1+($i/($m*100)))**($n*$m)}")
         	echo "Future Amount: $ft_amnt";;
 		d) m=12
-		ft_amnt=$(awk "BEGIN {print $p(1+($i/$m*100))**($n*$m)}")
+		ft_amnt=$(awk "BEGIN {print $p*(1+($i/($m*100)))**($n*$m)}")
         	echo "Future Amount: $ft_amnt";;
 
 	esac
@@ -85,7 +85,7 @@ ft_amnt_cmpd(){
 
 pr_amnt_cmpd(){
         echo "How much is the future amount?"
-        read p
+        read f
         echo "What is the interest rate(%)?"
         read i
         echo "How many years?"
@@ -99,14 +99,19 @@ pr_amnt_cmpd(){
         read ans
 
         case $ans in
-                a) m=1;;
-                b) m=2;;
-                c) m=4;;
-                d) m=12;;
+                a) m=1
+		pr_amnt=$(awk "BEGIN {print $f*(1+($i/($m*100)))**(-$n*$m)}")
+        	echo "Principal Amount: $pr_amnt";;
+                b) m=2
+		pr_amnt=$(awk "BEGIN {print $f*(1+($i/($m*100)))**(-$n*$m)}")
+	        echo "Principal Amount: $pr_amnt";;
+                c) m=4
+		pr_amnt=$(awk "BEGIN {print $f*(1+($i/($m*100)))**(-$n*$m)}")
+	        echo "Principal Amount: $pr_amnt";;
+                d) m=12
+		pr_amnt=$(awk "BEGIN {print $f*(1+($i/($m*100)))**(-$n*$m)}")
+	        echo "Principal Amount: $pr_amnt";;
         esac
-
-        pr_amnt=$(awk "BEGIN {print $f(1+($i/$m*100))**(-$n*$m)}")
-        echo "Principal Amount: $pr_amnt"
 }
 
 
@@ -126,16 +131,20 @@ int_rt_cmpd(){
         read ans
 
         case $ans in
-                a) m=1;;
-                b) m=2;;
-                c) m=4;;
-                d) m=12;;
-        esac
-
-        int_rt=$(awk "BEGIN {print ($m(($f/$p)**(1/$n*$m)-$m))*100 %}")
-        echo "Interest Rate: $int_rt"
+                a) m=1
+		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+	        echo "Interest Rate: $int_rt%";;
+                b) m=2
+		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+	        echo "Interest Rate: $int_rt%";;
+                c) m=4
+		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+	        echo "Interest Rate: $int_rt%";;
+                d) m=12
+		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+	        echo "Interest Rate: $int_rt%";;
+	esac
 }
-
 
 
 

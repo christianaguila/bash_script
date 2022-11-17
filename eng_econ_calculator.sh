@@ -49,7 +49,7 @@ yr_smpl(){
 
 
 
-#Compound Interesst equations
+#Compound Interest equations
 ft_amnt_cmpd(){
         echo "How much is the principal?"
         read p
@@ -132,16 +132,16 @@ int_rt_cmpd(){
 
         case $ans in
                 a) m=1
-		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+		int_rt=$(awk "BEGIN {print ($m*100*(($f/$p)**(1/($m*$n))-1))}")
 	        echo "Interest Rate: $int_rt%";;
                 b) m=2
-		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+		int_rt=$(awk "BEGIN {print ($m*100*(($f/$p)**(1/($m*$n))-1))}")
 	        echo "Interest Rate: $int_rt%";;
                 c) m=4
-		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+		int_rt=$(awk "BEGIN {print ($m*100*(($f/$p)**(1/($m*$n))-1))}")
 	        echo "Interest Rate: $int_rt%";;
                 d) m=12
-		int_rt=$(awk "BEGIN {print ($m*(($f/$p)**(1/($n*$m))-$m))*100}")
+		int_rt=$(awk "BEGIN {print ($m*100*(($f/$p)**(1/($m*$n))-1))}")
 	        echo "Interest Rate: $int_rt%";;
 	esac
 }
